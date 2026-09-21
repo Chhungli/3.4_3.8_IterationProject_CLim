@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="keywords" content="Music">
+    <meta name="author" content="Chhungli Lim">
+    <meta name="description" content="Graeme's Music">
+	<title>Graeme Music</title>
+
+    <!-- Import the web page's style sheet -->
+   <link rel="stylesheet" href="css/style_V1.css">
+  
+</head>
+
+<body>
+	<div id="info">
+    <!-- this is where my website content goes -->
+
+    <div class="grid-container">
+		
+		<div class="header"></div>
+		
+		<!-- this class is for my navigation/menu-->
+		<div class="nav">
+			
+		</div>
+		
+       <div class="content">
+           <div class="scroll-area">
+			<!--this is where my writing goes -->	   
+			   
+			   <div class="container">
+				   
+    				</div>
+			   
+           	 		</div>
+        		</div>
+
+        	<div class="footer"></div>
+		
+		</div>
