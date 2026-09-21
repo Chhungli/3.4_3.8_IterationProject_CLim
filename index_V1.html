@@ -1,60 +1,29 @@
 <?php
-	ob_start();
 	session_start();
 
-	$error = NULL;
-
-	if($_SERVER["REQUEST_METHOD"] == "POST") {
-
-		//connect.php (tells where to connect servername, dbasename, username, password)
-		require "MP3Filelister_mysqli.php";
-
-		//username and password sent form
-		$myusername = mysqli_real_escape_string($conn, $_POST['username']);
-		$mypassword = mysqli_real_escape_string($conn, $_POST['password']);
-
-		$query = "SELECT User_ID
-				  FROM user
-				  WHERE User_ID = '$myusername'
-				  AND Password = '$mypassword'";
-
-		$result = mysqli_query($conn,$query);
-
-		$count = mysqli_num_rows($result);
-
-		if($count == 1) {
-
-			$_SESSION['login_user'] = $myusername;
-
-			// Check if the user is "Graeme"
-			if(strtolower($myusername) == "graeme") {
-				header("location:admin.php");
-				exit();
-			}
-			else {
-				header("location:page2.php");
-				exit();
-			}
-		}
-		else {
-			$error = "Error Invalid username or password";
-		}
+	// Check if user is logged in
+	if(!isset($_SESSION['login_user'])) {
+		header("location:index.php");
+		exit();
 	}
 
-	ob_end_flush();
+	$User = $_SESSION['login_user'];
+
+	//connect to database
+	require "MP3Filelister_mysqli.php";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<link rel="icon" type="image/x-icon" href="images/music-player.png">
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="author" content="Chhungli Lim">
 		<meta name="description" content="Graeme's Music">
-		<title>Graeme Music - Login</title>
+		<title>Graeme Music - Home</title>
 
-		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/style2.css">
 	</head>
 
 	<body>
@@ -62,50 +31,71 @@
 
 			<div class="wrapper"><!-- the div that holds the grid -->
 
+				<div class="nav"><!-- Holds the page navigation -->
+					<nav class="site-nav">
+						<a href="page2.php" class="nav-logo">Graeme Music</a>
+						<ul class="nav-links">
+							<li><a href="page2.php" class="active">Home</a></li>
+							<li><a href="page3.php">Query 1</a></li>
+							<li><a href="page4.php">Query 2</a></li>
+							<li><a href="page5.php">Contact</a></li>
+							<?php if(strtolower($User) == "graeme"): ?>
+							<li><a href="admin.php">Admin Settings</a></li>
+							<?php endif; ?>
+							<li><a href="logout.php">Logout</a></li>
+						</ul>
+					</nav>
+				</div>
+
 				<div class="header"><!-- Holds the heading image -->
-					<h1 class="brand">Graeme <span>Music</span></h1>
-					<p class="tagline">Music For You</p>
+					<h1 class="brand">Graeme Music</h1>
 				</div>
 
 				<div class="content"><!-- Holds the main page content -->
 
-					<h1 class="grey">Log in</h1>
-
-					<div class="section3"><!-- Holds the main page content -->
-
-						<form method="post" id="index_v1.php">
-
-							<label for="username">Username:</label>
-
-							<input type="text"
-							name="username"
-							id="username"
-							placeholder="Enter user name"
-							required>
-
-							<div class="password-row">
-								<label for="passwordField">Password:</label>
-
-								<input type="password"
-								name="password"
-								id="passwordField"
-								placeholder="Enter user password"
-								required>
-
-								<span class="toggle-password" onclick="togglePassword()">Show</span>
-							</div>
-
-							<input type="submit" value="Login">
-
-						</form>
+					<div class="section-white">
+						<h2 class="section-heading">Popular Album Covers</h2>
+						<div class="album-strip">
+							<div class="album-tile" style="background-image: url('images/sza.png');">SZA (SOS)</div>
+							<div class="album-tile" style="background-image: url('images/rhianna.png');">Rhianna (Loud)</div>
+							<div class="album-tile" style="background-image: url('images/drake.png');">Drake (Scorpion)</div>
+							<div class="album-tile" style="background-image: url('images/taylorswift.png');">Taylor Swift (1989)</div>
+							<div class="album-tile" style="background-image: url('images/harrystyles.png');">Harry Styles (Fine Line)</div>
+						</div>
 					</div>
 
-					<?php
-						if($error != NULL)
-						{
-							echo "<p class='red'>$error</p>";
-						}
-					?>
+					<div class="section-purple">
+						Music has a way of bringing people together, no matter where they come from or what language they speak. From upbeat pop songs that make you want to dance, to calm acoustic tracks that help you relax, music can match every mood and moment. It tells stories, creates memories, and gives artists a way to express their emotions and creativity. Whether you're discovering new artists, replaying your favourite songs, or exploring different genres, music is more than just sound, it's an experience that connects people around the world. Everyone has that one song that takes them straight back to a certain moment, like a road trip with your mates, a summer that felt like it would never end, or a night you'll never forget. A song can hit you in a way nothing else does. Sometimes you don't even know why you love it, you just do. That's the best part about music, there's no right or wrong way to feel it.
+Some days you need something loud and hyped to get you going, and other days you just want something chill playing in the background while you do your own thing. Maybe you've been stuck on the same playlist for weeks, or maybe you're always hunting for the next song to put on repeat. Either way, there's always something new out there waiting to be found. A random recommendation from a friend or a song you stumble across at 2am can turn into your new obsession.
+That's what this site is all about. We want to make it easy for you to find music you actually love, check out artists you might not have heard of yet, and share it with the people around you. So put your headphones in, turn it up, and see where the music takes you.
+					</div>
+
+					<div class="section-white">
+						<h2 class="section-heading">Popular Artists</h2>
+						<div class="artist-grid">
+							<div class="artist-card">
+								<div class="artist-avatar" style="background-image: url('images/arianagrande.png');"></div>
+								<div class="artist-name">Ariana Grande</div>
+							</div>
+							<div class="artist-card">
+								<div class="artist-avatar" style="background-image: url('images/brunomars.png');"></div>
+								<div class="artist-name">Bruno Mars</div>
+							</div>
+							<div class="artist-card">
+								<div class="artist-avatar" style="background-image: url('images/edsheeran.png');"></div>
+								<div class="artist-name">Ed Sheeran</div>
+							</div>
+							<div class="artist-card">
+								<div class="artist-avatar" style="background-image: url('images/sabrinacarptener.png');"></div>
+								<div class="artist-name">Sabrina Carpenter</div>
+							</div>
+							<div class="artist-card">
+								<div class="artist-avatar" style="background-image: url('images/adele.png');"></div>
+								<div class="artist-name">Adele</div>
+							</div>
+						</div>
+						<a href="#top" class="back-to-top">&uarr;</a>
+					</div>
 
 				</div>
 
@@ -113,25 +103,13 @@
 					<p class="grey">
 						&copy; Copyright Chhungli Lim 2026
 					</p>
+					
+					<p class="grey attribution">Attribution: Creative Commons License</p>
+					
 				</div>
 
 			</div>
 
 		</main>
-
-		<script>
-	
-			function togglePassword() {
-				var field = document.getElementById("passwordField");
-				var label = document.querySelector(".toggle-password");
-				if (field.type === "password") {
-					field.type = "text";
-					label.textContent = "Hide";
-				} else {
-					field.type = "password";
-					label.textContent = "Show";
-				}
-			}
-		</script>
 	</body>
 </html>
