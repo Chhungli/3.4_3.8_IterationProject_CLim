@@ -1,0 +1,182 @@
+/* CSS files add styling rules to your content */
+
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Inter', sans-serif;
+	font-size: 16px;
+	background-color: #f4f2fa;
+	color: #1a1a1a;
+}
+
+.wrapper {
+	width: 100%;
+	margin: 0 auto;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background-color: #ffffff;
+	box-shadow: 0 0 25px rgba(0,0,0,0.08);
+}
+
+/* ---------- Header ---------- */
+.header {
+	position: relative;
+	background: radial-gradient(circle at 20% 30%, #3a1466 0%, #14051f 60%, #0a0212 100%);
+	padding: 70px 40px 60px 40px;
+	text-align: center;
+	overflow: hidden;
+}
+
+.header::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: repeating-linear-gradient(115deg, rgba(155,92,255,0.08) 0px, rgba(155,92,255,0.08) 2px, transparent 2px, transparent 12px);
+	pointer-events: none;
+}
+
+.header .brand {
+	position: relative;
+	z-index: 1;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 700;
+	font-size: 2.4em;
+	color: #ffffff;
+	letter-spacing: 1px;
+	margin: 0;
+}
+
+.header .brand span {
+	color: #b98bff;
+}
+
+.header .tagline {
+	position: relative;
+	z-index: 1;
+	color: #d8c8ff;
+	font-size: 1em;
+	margin-top: 10px;
+}
+
+/* ---------- Login ---------- */
+.content {
+	flex: 1;
+	padding: 40px 30px 50px 30px;
+	text-align: center;
+}
+
+.content h1.grey {
+	font-family: 'Poppins', sans-serif;
+	font-weight: 700;
+	font-size: 1.8em;
+	color: #2b1146;
+	margin-bottom: 30px;
+}
+
+.section3 {
+	max-width: 380px;
+	margin: 0 auto;
+	text-align: left;
+}
+
+.section3 form {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.section3 label {
+	font-weight: 600;
+	font-size: 0.95em;
+	color: #2b1146;
+	margin-top: 14px;
+}
+
+.section3 input[type="text"],
+.section3 input[type="password"] {
+	width: 100%;
+	padding: 12px 14px;
+	margin-top: 6px;
+	border: 1px solid #cfc2e8;
+	border-radius: 8px;
+	background-color: #f7f4fd;
+	font-size: 1em;
+	font-family: 'Inter', sans-serif;
+	color: #1a1a1a;
+}
+
+.section3 input[type="text"]:focus,
+.section3 input[type="password"]:focus {
+	outline: none;
+	border-color: #8b5cf6;
+	background-color: #ffffff;
+}
+
+.password-row {
+	position: relative;
+}
+
+.toggle-password {
+	position: absolute;
+	right: 14px;
+	top: 44px;
+	font-size: 0.85em;
+	color: #7c3aed;
+	cursor: pointer;
+	user-select: none;
+}
+
+.section3 input[type="submit"] {
+	margin-top: 26px;
+	padding: 12px;
+	border: none;
+	border-radius: 8px;
+	background-color: #8b5cf6;
+	color: #ffffff;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 600;
+	font-size: 1em;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+
+.section3 input[type="submit"]:hover {
+	background-color: #7c3aed;
+}
+
+.red {
+	color: #d0374c;
+	text-align: center;
+	font-weight: 600;
+	margin-top: 18px;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+	background-color: #8b5cf6;
+	text-align: center;
+	padding: 16px;
+}
+
+.footer p.grey {
+	color: #ffffff;
+	margin: 0;
+	font-size: 0.9em;
+}
+
+@media (max-width: 480px) {
+	.header {
+		padding: 50px 20px 40px 20px;
+	}
+	.header .brand {
+		font-size: 1.8em;
+	}
+}
