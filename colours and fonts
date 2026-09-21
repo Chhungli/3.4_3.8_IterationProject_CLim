@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="keywords" content="Music">
+    <meta name="author" content="Chhungli Lim">
+    <meta name="description" content="Graeme's Music">
+	<title>Graeme Music</title>
+
+    <!-- Import the web page's style sheet -->
+   <link rel="stylesheet" href="css/style_V3.css">
+  
+	<!--icons for nav bar -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+</head>
+
+<body>
+	<div id="info">
+    <!-- this is where my website content goes -->
+
+    <div class="grid-container">
+		
+				<!-- this class is for my navigation/menu-->
+		<div class="nav">
+			
+			<ul>
+	
+	</ul>
+			
+		</div>
+	
+        <div class="header"></div>
+		
+       <div class="content">
+           <div class="scroll-area">
+			<!--this is where my writing goes -->	   
+			   
+			   <h1>Nau mai, haere mai<h1>
+			   
+			   <div class="container">
+				   
+    				</div>
+			   
+           	 		</div>
+        		</div>
+
+        	<div class="footer"></div>
+		
+		</div>
