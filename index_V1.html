@@ -1,43 +1,137 @@
+<?php
+	ob_start();
+	session_start();
+
+	$error = NULL;
+
+	if($_SERVER["REQUEST_METHOD"] == "POST") {
+
+		//connect.php (tells where to connect servername, dbasename, username, password)
+		require "MP3Filelister_mysqli.php";
+
+		//username and password sent form
+		$myusername = mysqli_real_escape_string($conn, $_POST['username']);
+		$mypassword = mysqli_real_escape_string($conn, $_POST['password']);
+
+		$query = "SELECT User_ID
+				  FROM user
+				  WHERE User_ID = '$myusername'
+				  AND Password = '$mypassword'";
+
+		$result = mysqli_query($conn,$query);
+
+		$count = mysqli_num_rows($result);
+
+		if($count == 1) {
+
+			$_SESSION['login_user'] = $myusername;
+
+			// Check if the user is "Graeme"
+			if(strtolower($myusername) == "graeme") {
+				header("location:admin.php");
+				exit();
+			}
+			else {
+				header("location:page2.php");
+				exit();
+			}
+		}
+		else {
+			$error = "Error Invalid username or password";
+		}
+	}
+
+	ob_end_flush();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<link rel="icon" type="image/x-icon" href="images/music-player.png">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="Chhungli Lim">
+		<meta name="description" content="Graeme's Music">
+		<title>Graeme Music - Login</title>
 
-<head>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
 
-    <meta charset="utf-8">
-    <meta name="keywords" content="Music">
-    <meta name="author" content="Chhungli Lim">
-    <meta name="description" content="Graeme's Music">
-	<title>Graeme Music v1</title>
+	<body>
+		<main>
 
-    <!-- Import the web page's style sheet -->
-   <link rel="stylesheet" href="css/style_V1.css">
-  
-</head>
+			<div class="wrapper"><!-- the div that holds the grid -->
 
-<body>
-	<div id="info">
-    <!-- this is where my website content goes -->
+				<div class="header"><!-- Holds the heading image -->
+					<h1 class="brand">Graeme <span>Music</span></h1>
+					<p class="tagline">Music For You</p>
+				</div>
 
-    <div class="grid-container">
-		
-		<div class="header"></div>
-		
-		<!-- this class is for my navigation/menu-->
-		<div class="nav">
-			
-		</div>
-		
-       <div class="content">
-           <div class="scroll-area">
-			<!--this is where my writing goes -->	   
-			   
-			   <div class="container">
-				   
-    				</div>
-			   
-           	 		</div>
-        		</div>
+				<div class="content"><!-- Holds the main page content -->
 
-        	<div class="footer"></div>
-		
-		</div>
+					<h1 class="grey">Log in</h1>
+
+					<div class="section3"><!-- Holds the main page content -->
+
+						<form method="post" id="index_v1.php">
+
+							<label for="username">Username:</label>
+
+							<input type="text"
+							name="username"
+							id="username"
+							placeholder="Enter user name"
+							required>
+
+							<div class="password-row">
+								<label for="passwordField">Password:</label>
+
+								<input type="password"
+								name="password"
+								id="passwordField"
+								placeholder="Enter user password"
+								required>
+
+								<span class="toggle-password" onclick="togglePassword()">Show</span>
+							</div>
+
+							<input type="submit" value="Login">
+
+						</form>
+					</div>
+
+					<?php
+						if($error != NULL)
+						{
+							echo "<p class='red'>$error</p>";
+						}
+					?>
+
+				</div>
+
+				<div class="footer"><!-- Holds the footer notes -->
+					<p class="grey">
+						&copy; Copyright Chhungli Lim 2026
+					</p>
+				</div>
+
+			</div>
+
+		</main>
+
+		<script>
+	
+			function togglePassword() {
+				var field = document.getElementById("passwordField");
+				var label = document.querySelector(".toggle-password");
+				if (field.type === "password") {
+					field.type = "text";
+					label.textContent = "Hide";
+				} else {
+					field.type = "password";
+					label.textContent = "Show";
+				}
+			}
+		</script>
+	</body>
+</html>
